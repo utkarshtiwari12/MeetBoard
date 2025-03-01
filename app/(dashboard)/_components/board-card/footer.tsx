@@ -5,7 +5,7 @@ interface FooterProps {
     title: string;
     authorLabel: string;
     createdAtLabel: string;
-    isFavorite: string;
+    isFavorite: boolean;
     onClick: () => void;
     isDisabled: boolean
 }
