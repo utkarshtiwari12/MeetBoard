@@ -43,6 +43,7 @@ export const RenameModel = () => {
             .then(() => {
                 toast.success("Board Renamed");
                 onClose();
+                window.location.reload();
             })
             .catch(() => {
                 toast.error("Failed to Rename board");
