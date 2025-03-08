@@ -1,7 +1,7 @@
 "use client";
 
 import { DropdownMenuContentProps } from "@radix-ui/react-dropdown-menu";
-import { DropdownMenu, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, DropdownMenuSeparator } from "./ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuTrigger, DropdownMenuItem, DropdownMenuContent, } from "./ui/dropdown-menu";
 
 import { ConfirmModel } from "./confirm.model";
 
@@ -12,6 +12,7 @@ import { api } from "@/convex/_generated/api";
 import { Id } from "@/convex/_generated/dataModel"; // Import Id type
 import { Button } from "./ui/button";
 import { useRenameModel } from "@/store/use-rename-model";
+import { useRouter } from "next/navigation";
 
 interface ActionProps{
     children: React.ReactNode;
@@ -29,6 +30,8 @@ export const Actions = ({
     title
 }: ActionProps) => {
 
+    const router = useRouter();
+
     const {onOpen} = useRenameModel();
 
     const remove = useMutation(api.board.remove);
@@ -37,6 +40,7 @@ export const Actions = ({
         remove({ id: id as Id<"boards"> })  
             .then(() => {
                 toast.success("Board Deleted");
+                router.push("/")
             })
             .catch(() => {
                 toast.error("Failed to delete board");
